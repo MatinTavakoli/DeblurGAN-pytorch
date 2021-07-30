@@ -125,6 +125,7 @@ class Trainer(BaseTrainer):
                     # add other loss if you like
                     raise NotImplementedError
 
+                torch.autograd.set_detect_anomaly(True)
                 discriminator_loss_per_update.backward(retain_graph=True)
                 self.discriminator_optimizer.step()
                 discriminator_loss += discriminator_loss_per_update.item()
