@@ -108,7 +108,7 @@ class Trainer(BaseTrainer):
                         'deblurred_discriminator_out': deblurred_discriminator_out
                     }
                     wgan_loss_d, gp_d = self.adversarial_loss('D', **kwargs)
-                    discriminator_loss_per_update = wgan_loss_d + gp_d
+                    discriminator_loss_per_update = wgan_loss_d.clone() + gp_d.clone()
 
                     self.writer.add_scalar('wgan_loss_d', wgan_loss_d.item())
                     self.writer.add_scalar('gp_d', gp_d.item())
@@ -118,7 +118,7 @@ class Trainer(BaseTrainer):
                         'deblurred_discriminator_out': deblurred_discriminator_out
                     }
                     gan_loss_d = self.adversarial_loss('D', **kwargs)
-                    discriminator_loss_per_update = gan_loss_d
+                    discriminator_loss_per_update = gan_loss_d.clone()
 
                     self.writer.add_scalar('gan_loss_d', gan_loss_d.item())
                 else:
