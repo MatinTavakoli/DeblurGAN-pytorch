@@ -40,8 +40,8 @@ class GoProDataset(Dataset):
             assert isinstance(blurred, torch.Tensor) and isinstance(sharp, torch.Tensor)
             h_offset = random.randint(0, self.height - self.fine_size)
             w_offset = random.randint(0, self.width - self.fine_size)
-            blurred = blurred[:, h_offset:h_offset + self.fine_size, w_offset:w_offset + self.fine_size]
-            sharp = sharp[:, h_offset:h_offset + self.fine_size, w_offset:w_offset + self.fine_size]
+            blurred = blurred[:, h_offset:h_offset + self.fine_size, w_offset:w_offset + self.fine_size].clone()
+            sharp = sharp[:, h_offset:h_offset + self.fine_size, w_offset:w_offset + self.fine_size].clone()
 
         return {'blurred': blurred, 'sharp': sharp}
 
